@@ -8,6 +8,9 @@ public class RobotController : MonoBehaviour
     // Stores a reference of the SpriteRenderer component (if any)
     SpriteRenderer _renderer;
 
+    // Returns true if the character in jumping
+    bool _isJumping;
+
     // A modifier for the movement
     public float speedMultiplier = 10;
 
@@ -37,9 +40,12 @@ public class RobotController : MonoBehaviour
         // Adds the evaluated force to the rigidbody
         _rigidbody.AddForce(moveForce);
 
-        // If the jump button has been pressed this frame...
-        if(Input.GetButtonDown("Jump"))
+        // If the jump button has been pressed this frame
+        // and the character is not jumping.
+        if (Input.GetButtonDown("Jump") && !_isJumping)
         {
+            _isJumping = true;
+
             // Store in a variable the jump (vertical) force
             Vector2 jumpForce = Vector2.up * jumpMultiplier;
 
@@ -54,6 +60,15 @@ public class RobotController : MonoBehaviour
         } else if (hMove < 0)
         {
             _renderer.flipX = true;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Checks if the colliding object is tagged as a platform
+        if (collision.gameObject.tag == "Platform")
+        {
+            _isJumping = false;
         }
     }
 }
