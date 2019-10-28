@@ -8,6 +8,9 @@ public class RobotController : MonoBehaviour
     // Stores a reference of the SpriteRenderer component (if any)
     SpriteRenderer _renderer;
 
+    // Stores a reference of the Animator component (if any)
+    Animator _animator;
+
     // Returns true if the character in jumping
     bool _isJumping;
 
@@ -25,6 +28,8 @@ public class RobotController : MonoBehaviour
         
         // Retrieves the sprite renderer component
         _renderer = GetComponent<SpriteRenderer>();
+
+        _animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -61,6 +66,15 @@ public class RobotController : MonoBehaviour
         {
             _renderer.flipX = true;
         }
+
+        _animator.SetBool("IsJumping", _isJumping);
+
+    //  Sets the speed parameter
+        _animator.SetFloat("Speed", Mathf.Abs(hMove));
+
+        //  Same as above
+        //     float absoluteMove = Mathf.Abs(hMove);
+        //     _animator.SetFloat("Speed", absoluteMove);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
