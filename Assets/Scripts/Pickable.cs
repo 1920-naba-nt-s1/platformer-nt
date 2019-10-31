@@ -5,6 +5,7 @@ using UnityEngine;
 public class Pickable : MonoBehaviour
 {
 
+    // The jump bonus added to the character
     public float jumpBonus = 20;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -18,6 +19,7 @@ public class Pickable : MonoBehaviour
             robotController.jumpMultiplier = jumpBonus;
         }
 
+        // Removes the object omce it has been picked up
         Destroy(gameObject);
     }
 

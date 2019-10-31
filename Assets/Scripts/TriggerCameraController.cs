@@ -5,6 +5,7 @@ using Cinemachine;
 
 public class TriggerCameraController : MonoBehaviour
 {
+    // The virtual camera to be activated/deactivated
     public CinemachineVirtualCamera shot;
 
     private void OnTriggerEnter2D(Collider2D collision)
